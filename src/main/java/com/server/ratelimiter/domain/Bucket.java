@@ -12,7 +12,7 @@ public class Bucket {
         this.capacity = capacity;
         this.currentToken = currentToken;
         this.refillRate = refillRate;
-        this.lastRefillTime = System.nanoTime();
+        this.lastRefillTime = System.currentTimeMillis();
     }
     
     public int getCapacity() {
@@ -47,25 +47,6 @@ public class Bucket {
         this.lastRefillTime = lastRefillTime;
     }
 
-    public boolean allowRequest() {
-        refillToken();
-        if (currentToken >= 1) {
-            currentToken--;
-            return true;
-        }
-        return false;
-    }
-
-    void refillToken() {
-        long now = System.nanoTime();
-        long elapsedNanos = now - lastRefillTime;
-        long elapsedSeconds = elapsedNanos / 1_000_000_000L;
-        if (elapsedSeconds > 0) {
-            int tokensToAdd = (int) (elapsedSeconds * refillRate);
-            currentToken = Math.min(capacity, currentToken + tokensToAdd);
-            lastRefillTime += elapsedSeconds * 1_000_000_000L;
-        }
-    }
 
     @Override
     public String toString() {
