@@ -30,4 +30,10 @@ public class AddressController {
     ResponseEntity<AddressDTO> createAddress(@RequestBody AddressDTO address){
         return ResponseEntity.ok().body(addressService.createAddress(address));
     }
+
+    @RateLimit(type = RateLimiterType.SLIDING_WINDOW_LOGS, key = RateLimiterKeyType.USER)
+    @GetMapping("/get-all/cities")
+    ResponseEntity<List<String>> getAllCities(){
+        return ResponseEntity.ok().body(addressService.getAllCities());
+    }
 }

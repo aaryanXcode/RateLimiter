@@ -40,4 +40,8 @@ public class AddressService {
                 entity.isDefault()
         );
     }
+
+    public List<String> getAllCities() {
+        return addressRepository.findAll().stream().map(AddressEntity::getCity).toList();
+    }
 }
