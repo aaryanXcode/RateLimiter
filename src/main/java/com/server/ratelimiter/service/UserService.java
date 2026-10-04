@@ -54,4 +54,7 @@ public class UserService {
     }
 
 
+    public List<String> getAllNames() {
+        return userRepository.findAll().stream().map(UserEntity::getName).toList();
+    }
 }

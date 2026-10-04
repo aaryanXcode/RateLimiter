@@ -47,6 +47,11 @@ public class UserController {
     public ResponseEntity<String> createUser(@RequestBody User user) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.createUser(user));
     }
-    
+
+    @RateLimit(type = RateLimiterType.LEAKY_BUCKET, key = RateLimiterKeyType.USER)
+    @GetMapping("/get-all/names")
+    ResponseEntity<List<String>> getAllNames(){
+        return ResponseEntity.ok().body(userService.getAllNames());
+    }
     
 }
