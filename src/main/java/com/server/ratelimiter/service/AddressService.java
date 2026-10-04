@@ -44,4 +44,8 @@ public class AddressService {
     public List<String> getAllCities() {
         return addressRepository.findAll().stream().map(AddressEntity::getCity).toList();
     }
+
+    public List<String> getAllStreets() {
+        return addressRepository.findAll().stream().map(AddressEntity::getStreet).toList();
+    }
 }

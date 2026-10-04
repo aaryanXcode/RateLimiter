@@ -36,4 +36,11 @@ public class AddressController {
     ResponseEntity<List<String>> getAllCities(){
         return ResponseEntity.ok().body(addressService.getAllCities());
     }
+
+    @RateLimit(type = RateLimiterType.SLIDING_WINDOW_COUNTER, key = RateLimiterKeyType.USER)
+    @GetMapping("/get-all/streets")
+    ResponseEntity<List<String>> getAllStreets(){
+        return ResponseEntity.ok().body(addressService.getAllStreets());
+    }
+
 }
